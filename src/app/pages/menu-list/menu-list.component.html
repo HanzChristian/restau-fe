@@ -1,0 +1,25 @@
+<section id="menulist">
+  <header>
+    <h1>
+      Pilih Menu yang tersedia!
+    </h1>
+  </header>
+
+  <div  class="card-container">
+  <div class="card-hover" *ngFor="let card of cards" [style.flex]="displayCardFlex()">
+    <div class="card-hover__content">
+      <h3 class="card-hover__title">
+        {{ card.title}}
+      </h3>
+      <p class="card-hover__text">{{card.text}}</p>
+      <a [routerLink]="['/',card.link]" class="card-hover__link">
+        <span>Next</span>
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+    </div>
+    <img [src]="card.image" alt="">
+  </div>
+</div>
+</section>

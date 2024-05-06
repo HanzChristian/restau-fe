@@ -1,0 +1,148 @@
+<body>
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="box-form">
+        <div class="card text-black">
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mt-4">Sign up</p>
+
+                <form class="mx-1 mx-md-4">
+
+                  <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label">Nama Depan</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="user.namaDepan"
+                        required
+                        name="namaDepan"
+                        #namaDepan="ngModel"/>
+
+
+                      <div *ngIf="!namaDepan.valid && (namaDepan.dirty || namaDepan.touched)" class="text-danger">
+                        Harap isi Nama Depan!
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label">Nama Belakang</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="user.namaBelakang"
+                      required
+                      name="namaBelakang"
+                      #namaBelakang="ngModel" />
+
+                      <div *ngIf="!namaBelakang.valid && (namaBelakang.dirty || namaBelakang.touched)" class="text-danger">
+                        Harap isi Nama Belakang!
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label">Email</label>
+                      <input
+                      type="email"
+                      class="form-control"
+                      [(ngModel)]="user.email"
+                      required
+                      name="email"
+                      #email = "ngModel"
+                      pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"/>
+
+                      <div *ngIf="!email.valid && (email.dirty || email.touched)" class="text-danger">
+                        Harap isi Email!
+                      </div>
+                      <div *ngIf="email.errors?.['pattern']" class="text-danger">
+                        Email tidak valid!
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label">Password</label>
+
+                      <input
+                      type="password"
+                      class="form-control"
+                      [(ngModel)]="user.pass"
+                      required
+                      name="password"
+                      #password="ngModel"
+                      pattern="(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d]{6,}.*"/>
+
+                      <div *ngIf="!password.valid && (password.dirty || password.touched)" class="text-danger">
+                        Harap isi Password!
+                      </div>
+
+                      <div *ngIf="password.errors?.['pattern']" class="text-danger">
+                        Password minimal 6 karakter, mengandung huruf besar dan kecil!
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="role">Role</label>
+                      <div id="role" class="d-flex">
+                        <div style="margin-right: 20px;">
+                          <input type="radio" id="manager" name="role" value= "1" [(ngModel)]="user.akses">
+                          <label for="manager">Manager</label>
+                        </div>
+                        <div>
+                          <input type="radio" id="kasir" name="role" value="2" [(ngModel)]="user.akses"required>
+                          <label for="kasir">Kasir</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mt-3">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                  <p>Sudah memiliki akun?
+
+                    <a [routerLink]="'/login'" routerLinkActive="active" class="btn-primary">
+                      Login
+                    </a>
+                  </p>
+                  </div>
+
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button [disabled]="!user.namaDepan || !user.namaBelakang ||  !user.email || !user.pass || !user.akses || !isValidEmail(user.email) || !isValidPassword(user.pass)" (click)="onRegister()" class="btn btn-primary">Register</button>
+                  </div>
+
+
+                </form>
+
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://static.vecteezy.com/system/resources/previews/007/679/655/original/people-eating-talking-drinking-and-working-at-tables-on-cafe-or-restaurant-in-flat-cartoon-illustration-vector.jpg"
+                  class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+

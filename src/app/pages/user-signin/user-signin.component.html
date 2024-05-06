@@ -1,0 +1,46 @@
+<body>
+  <div class="box-form">
+    <div class="left">
+      <div class="overlay">
+        <h1>Rest   Au.</h1>
+        <h5>Automisasi untuk Restoran</h5>
+      </div>
+    </div>
+
+    <div class="right">
+      <h1 class="fw-bold">Login</h1>
+      <div class="inputs">
+        <div class="form-group">
+          <input type="text"
+          class="form-control"
+          placeholder="email"
+          [(ngModel)]="user.email"
+          required >
+        </div>
+        <div class="form-group">
+          <input
+          type="password"
+          class="form-control"
+          placeholder="password"
+          [(ngModel)]="user.pass"
+          required>
+        </div>
+      </div>
+      <br>
+      <p>Belum memiliki akun?
+        <br>
+        <a [routerLink]="'/register'" routerLinkActive="active" class="btn-primary">
+          Buat Akun
+        </a>
+      </p>
+
+
+      <br>
+      <button (click)="onSignIn()" class="btn btn-primary">Log In</button>
+    </div>
+
+  </div>
+</body>
+
+
+

@@ -1,0 +1,268 @@
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+  <section id="minimal-statistics" class="grey-bg container-fluid">
+    <button class="previous-button" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <div class="row">
+      <div class="col-12 mt-3 mb-1">
+        <h4 class="text-uppercase">List Menu</h4>
+      </div>
+    </div>
+    <span class="crud">Tambahkan Data</span>
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card" (click)="openJenisMenu(jenisMenuModal)">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="align-self-center flex-item">
+                  <img src="https://cdn-icons-png.flaticon.com/512/5109/5109748.png" width="80" height="80" class="img">
+                </div>
+                <div class="media-body text-right">
+                  <h3>Jenis Menu</h3>
+                  <span class="text">Menambahkan jenis menu</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card" (click)="openMenu(menuModal)">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="align-self-center">
+                  <img src="https://cdn-icons-png.freepik.com/512/7064/7064359.png" width="80" height="80" class="img">
+                </div>
+                <div class="media-body text-right">
+                  <h3>Menu</h3>
+                  <span>Menambahkan menu makanan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card" (click)="openTabel(tabelModal)" >
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="align-self-center">
+                  <img src="https://cdn-icons-png.freepik.com/512/6175/6175089.png" width="80" height="80" class="img">
+                </div>
+                <div class="media-body text-right">
+                  <h3>Meja</h3>
+                  <span>Menambahkan meja kustomer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <span class="crud">Menampilkan & Edit Data</span>
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card" (click)="scrollToId('jenis-menu')" [routerLink]="['/stock-menu/jenis-menu']">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="media-body text-left">
+                  <h3 class="danger">Data Menu</h3>
+                  <span>Lihat dan edit menu makanan</span>
+                </div>
+                <div class="align-self-center">
+                  <img src="https://cdn-icons-png.flaticon.com/512/3566/3566406.png" width="80" height="80" class="img-right">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card" (click)="scrollToId('data-kasir')" [routerLink]="['/stock-menu/data-kasir']">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="media-body text-left">
+                  <h3 class="primary">Data Kasir</h3>
+                  <span>Menampilkan data kasir terdaftar</span>
+                </div>
+                <div class="align-self-center">
+                  <img src="https://cdn-icons-png.freepik.com/512/3588/3588516.png" width="80" height="80" class="img-right">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card" (click)="scrollToId('data-tabel')" [routerLink]="['/stock-menu/data-tabel']">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="media-body text-left">
+                  <h3 class="warning">Data Meja</h3>
+                  <span>Lihat banyaknya tabel yang ada</span>
+                </div>
+                <div class="align-self-center">
+                  <img src="https://cdn-icons-png.freepik.com/512/3424/3424480.png" width="80" height="80" class="img-right">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <button class="sign-out-button" (click)="onSignOut()">Sign Out</button>
+  </section>
+
+  <router-outlet></router-outlet>
+
+
+  <!-- Modal untuk jenis menu -->
+
+  <ng-template #jenisMenuModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-basic-title">Masukkan Jenis Menu</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group">
+          <label for="inputField">Nama Jenis Menu</label>
+          <input
+          type="text"
+          class="form-control"
+          name="namaJenis"
+          #namaJenis="ngModel"
+          [(ngModel)]="jenisMenu.namaJenis"
+          required>
+
+          <!-- <div *ngIf="!jenisMenu.valid && (jenisMenu.dirty || jenisMenu.touched)" class="text-danger">
+            Harap isi Jenis Menu!
+          </div> -->
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light save" (click)="saveJenisModel()">Save</button>
+      <button type="button" class="btn btn-light close" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+  <!--  -->
+
+  <!-- Modal untuk Menu -->
+
+<!-- Modal untuk Menu -->
+<ng-template #menuModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-basic-title">Masukkan Menu</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+      <div class="form-group">
+        <label for="inputField">Jenis Menu</label>
+        <select
+        class="form-control"
+        id="jenisMenuSelect"
+        [(ngModel)]="menu.jenisMenu">
+          <option *ngFor="let menu of jenisMenuResponse" [value]="menu.id">{{menu.namaJenis}}</option>
+        </select>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <label for="inputField"> Nama Menu</label>
+        <input
+        type="text"
+        class="form-control"
+        name="namaMenu"
+        #namaMenu="ngModel"
+        [(ngModel)]="menu.namaMenu"
+        required>
+
+      </div>
+      <br>
+
+      <label for="inputField"> Deskripsi Menu</label>
+      <textarea
+        class="form-control"
+        name="deskripsiMenu"
+        #deskripsiMenu="ngModel"
+        [(ngModel)]="menu.deskripsiMenu"
+        required
+        rows="4">
+      </textarea>
+
+      <br>
+
+      <div class="form-group">
+        <label for="harga">Harga (IDR)</label>
+        <input
+        type="number"
+        class="form-control"
+        name="hargaMenu"
+        #hargaMenu="ngModel"
+        [(ngModel)]="menu.hargaMenu"
+        min="100"
+        required>
+      </div>
+
+      <br>
+
+      <div class="form-group">
+        <label for="menuImage">Gambar Menu</label>
+        <input
+        type="file"
+        id="menuImage"
+        class="form-control"
+        (change)="onFileSelected($event)" accept=".jpg,.png">
+      </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light save" (click)="saveMenu()">Save</button>
+    <button type="button" class="btn btn-light close" (click)="modal.close('Close click')">Close</button>
+  </div>
+
+
+</ng-template>
+
+  <!--  -->
+
+  <!-- Modal untuk Tabel -->
+
+  <ng-template #tabelModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-basic-title-tabel">Menambahkan Meja</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <p>Apakah anda ingin menambahkan meja baru?</p>
+      <div class="btnTabel">
+        <button type="button" class="btn btn-light save" (click)="saveTabel()">Tambahkan</button>
+        <button type="button" class="btn btn-light close" (click)="modal.dismiss('Cross click')">Cancel</button>
+      </div>
+    </div>
+
+  </ng-template>
+  <!--  -->
+
+

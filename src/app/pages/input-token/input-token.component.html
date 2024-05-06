@@ -1,0 +1,21 @@
+<body>
+  <div class="box-form">
+    <div class="content">
+      <h5 class="text">Masukkan Verifikasi yang telah dikirimkan melalui E-mail!</h5>
+      <input type="text"
+      class="token-input mt-4"
+      placeholder="Token"
+      [(ngModel)]="user.token"
+      name="token"
+      required
+      #token="ngModel"
+      maxlength="6"
+      >
+
+      <button [class.disabled]="!user.token || user.token.length != 6" (click)="onToken()" class="submit-btn mt-4">Submit</button>
+    </div>
+    <div class="bottom-text">
+      <span>@ 2024 RestAu</span>
+    </div>
+  </div>
+</body>

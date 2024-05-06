@@ -1,0 +1,109 @@
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+<section class="dashboard-order">
+    <button class="previous-button" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+
+  <div class="card p-4">
+    <div class="welcome">
+      <div class="content rounded-3 p-3 mb-4">
+        <h1 class="fs-3">Dashboard Order Restoran</h1>
+        <p class="mb-0">Lihat orderan masuk dan selesaikan transaksinya!</p>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="search" class="form-label">Search Nama Kustomer</label>
+        <input id="search" type="text" class="form-control" placeholder="Search..." [(ngModel)]="search" (input)="sortData(sort.key)">
+      </div>
+      <div class="col-md-6 text-end">
+        <label for="pageSize" class="form-label">Page Size</label>
+        <select id="pageSize" class="form-select" [(ngModel)]="pageSize" (change)="sortData(sort.key)">
+          <option value="1">1</option>
+          <option value="3">3</option>
+          <option value="5">15</option>
+          <option value="10">20</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Add the table here -->
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th (click)="sortData('id')">
+              Id Transaksi
+              <i class="fa" [ngClass]="{'fa-sort-up': sort.key=='id' && sort.order=='asc', 'fa-sort-down': sort.key=='id' && sort.order=='desc', 'fa-sort': sort.key!='id'}"></i>
+            </th>
+            <th>Nama Kustomer</th>
+            <th>Nama Menu</th>
+            <th (click)="sortData('hargaMenu')">
+              Harga Menu
+              <i class="fa" [ngClass]="{'fa-sort-up': sort.key=='hargaMenu' && sort.order=='asc', 'fa-sort-down': sort.key=='hargaMenu' && sort.order=='desc', 'fa-sort': sort.key!='hargaMenu'}"></i>
+            </th>
+            <th>Jumlah Menu</th>
+            <th (click)="sortData('totalHarga')">
+              Total Harga
+              <i class="fa" [ngClass]="{'fa-sort-up': sort.key=='totalHarga' && sort.order=='asc', 'fa-sort-down': sort.key=='totalHarga' && sort.order=='desc', 'fa-sort': sort.key!='totalHarga'}"></i>
+            </th>
+            <th>Dimasak</th>
+            <th (click)="sortData('namaDepan')">
+              Do Approve oleh
+              <i class="fa" [ngClass]="{'fa-sort-up': sort.key=='namaDepan' && sort.order=='asc', 'fa-sort-down': sort.key=='namaDepan' && sort.order=='desc', 'fa-sort': sort.key!='namaDepan'}"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.id }}</td>
+            <td>{{ order.namaKustomer }}</td>
+            <td>{{ order.namaMenu }}</td>
+            <td>{{ order.hargaMenu | currency:'IDR':'symbol':'1.0-0' }}</td>
+            <td>{{ order.jumlahMenu }}</td>
+            <td>{{ order.totalHarga | currency:'IDR':'symbol':'1.0-0' }}</td>
+
+            <td>
+              <span *ngIf="order.cooked === true; else checkBatal" class="text-success">
+                <i class="fas fa-check"></i> Yes
+              </span>
+
+              <ng-template #checkBatal>
+                <span *ngIf="order.batal === true; else notCooked" class="text-danger">
+                  <i class="fas fa-times"></i> Di Cancel
+                </span>
+              </ng-template>
+
+              <ng-template #notCooked>
+                <button class="btn btn-warning" (click)="markAsCooked(order.id,order.namaKustomer)">Dalam Proses</button>
+              </ng-template>
+            </td>
+            <td>
+              <span *ngIf="order.namaDepan && order.namaBelakang; else notApproved" class="text-success font-weight-bold">
+                {{ order.namaDepan }} {{ order.namaBelakang }}
+              </span>
+              <ng-template #notApproved>
+                <span class="text-danger font-weight-bold">Belum diapprove</span>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-end mt-3">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item" *ngFor="let p of [].constructor(totalPages); let i = index" [class.active]="i === page">
+              <a class="page-link" (click)="getPage(i)">{{i + 1}}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <button class="sign-out-button" (click)="onSignOut()">Sign Out</button>
+</section>

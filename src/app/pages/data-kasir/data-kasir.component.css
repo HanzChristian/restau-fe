@@ -1,0 +1,32 @@
+#data-kasir {
+  background-color: #F5F7FA;
+  padding: 20px;
+}
+
+#data-kasir .container {
+  margin-bottom: 100px;
+  max-width: 1000px;
+}
+
+#data-kasir .card {
+  border-radius: 5px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+#data-kasir .card-header {
+  background-color: #007bff;
+  color: white;
+}
+
+#data-kasir .card-title {
+  color: white;
+}
+
+#data-kasir .table thead {
+  background-color: #6c757d;
+  color: white;
+}
+
+#data-kasir .table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
